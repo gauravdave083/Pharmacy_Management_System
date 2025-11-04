@@ -10,7 +10,8 @@ def load_inventory():
     return pd.DataFrame({
         "Item": ["Paracetamol", "Ibuprofen", "Amoxicillin"],
         "Quantity": [100, 50, 200],
-        "Price": [1.5, 2.0, 0.8]
+        "Price": [1.5, 2.0, 0.8],
+        "Product Type": ["💊", "💊", "💊"]
     })
 
 @st.cache_data
@@ -53,6 +54,10 @@ def main():
     if "inventory" not in st.session_state:
         st.session_state.inventory = get_cached_inventory().copy()
 
+    # Ensure inventory table and add product attributes are consistent
+    if "Type" not in st.session_state.inventory.columns:
+        st.session_state.inventory["Type"] = "Other 🛒"
+
     with st.sidebar:
         st.markdown("""
         <style>
@@ -71,8 +76,27 @@ def main():
         )
 
     if selected == "🏠 Home":
-        st.title("🏥 Pharmacy Management System")
-        st.write("Welcome to the **Pharmacy Management System**! Manage your inventory, track sales, and generate reports effortlessly.")
+        st.title("🏥 Welcome to the Pharmacy Management System")
+        st.image("https://via.placeholder.com/800x300.png?text=Pharmacy+Management+System", use_container_width=True)
+        st.write("""
+        Welcome to the **Pharmacy Management System**! This platform helps you:
+        - Manage your inventory efficiently.
+        - Track sales and generate insightful reports.
+        - Add new products and keep your stock updated.
+        - Download detailed reports in PDF format.
+        
+        ### Features:
+        - 📦 **Inventory Management**: Keep track of all your products.
+        - ➕ **Add Products**: Add new items to your inventory.
+        - 📊 **Sales Tracking**: Monitor your sales performance.
+        - 📈 **Reports**: Generate and download reports effortlessly.
+        
+        ### Get Started:
+        Use the sidebar to navigate through the system and explore its features.
+        """)
+
+        st.info("Tip: Check out the Reports tab to see a summary of your inventory!")
+        st.success("New Feature: You can now add products dynamically and see them reflected in the reports!")
 
     elif selected == "📦 Inventory":
         st.title("📦 Inventory Management")
@@ -86,12 +110,15 @@ def main():
             new_item = st.text_input("Item Name")
             new_quantity = st.number_input("Quantity", min_value=0, step=1)
             new_price = st.number_input("Price", min_value=0.0, step=0.1)
+            product_type = st.selectbox("Product Type", ["Tablet 💊", "Syrup 🥤", "Injection 💉", "Other 🛒"])
             submitted = st.form_submit_button("Add Item")
 
             if submitted:
-                new_row = {"Item": new_item, "Quantity": new_quantity, "Price": new_price}
+                # Sanitize the input to remove unsupported characters
+                sanitized_item = new_item.encode('latin1', 'ignore').decode('latin1')
+                new_row = {"Item": sanitized_item, "Quantity": new_quantity, "Price": new_price, "Type": product_type}
                 st.session_state.inventory = pd.concat([st.session_state.inventory, pd.DataFrame([new_row])], ignore_index=True)
-                st.success(f"Item '{new_item}' added successfully!")
+                st.success(f"Item '{sanitized_item}' added successfully!")
 
     elif selected == "📊 Sales":
         st.title("📊 Sales Tracking")
@@ -100,6 +127,7 @@ def main():
 
     elif selected == "📈 Reports":
         st.title("📈 Reports")
+        # Dynamically generate the report based on the current inventory
         report_data = generate_report_from_inventory(st.session_state.inventory)
         st.dataframe(report_data, width='stretch')
 
