@@ -18,3 +18,11 @@ Press CTRL+C to quit
 127.0.0.1 - - [04/Nov/2025 20:08:32] "GET /api/medications HTTP/1.1" 200 -
 127.0.0.1 - - [04/Nov/2025 20:08:40] "GET /health HTTP/1.1" 200 -
 127.0.0.1 - - [04/Nov/2025 20:08:40] "GET /api/medications?page=1&page_size=100 HTTP/1.1" 200 -
+ * Detected change in '/workspaces/Pharmacy_Management_System/wsgi.py', reloading
+ * Detected change in '/workspaces/Pharmacy_Management_System/wsgi.py', reloading
+✅ Connected to MongoDB: pharmacy_management
+✅ MongoEngine connected to: pharmacy_management
+✅ Database indexes processed successfully
+ * Restarting with watchdog (inotify)
+ * Debugger is active!
+ * Debugger PIN: 123-252-391
