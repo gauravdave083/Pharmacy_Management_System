@@ -34,7 +34,10 @@ def create_pdf(dataframe):
     pdf.cell(200, 10, txt="Pharmacy Management System Report", ln=True, align='C')
 
     for i, row in dataframe.iterrows():
-        pdf.cell(200, 10, txt=f"{row['Report Section']}: {row['Details']}", ln=True)
+        # Remove unsupported characters
+        section = row['Report Section'].encode('latin1', 'ignore').decode('latin1')
+        details = row['Details'].encode('latin1', 'ignore').decode('latin1')
+        pdf.cell(200, 10, txt=f"{section}: {details}", ln=True)
 
     return pdf
 
@@ -73,19 +76,6 @@ def main():
 
     elif selected == "📦 Inventory":
         st.title("📦 Inventory Management")
-
-        # Display inventory with delete buttons
-        for index, row in st.session_state.inventory.iterrows():
-            col1, col2, col3, col4, col5 = st.columns([3, 2, 2, 2, 1])
-            col1.write(row['Item'])
-            col2.write(row['Quantity'])
-            col3.write(row['Price'])
-            delete_button = col5.button("Delete", key=f"delete_{index}")
-
-            if delete_button:
-                st.session_state.inventory = st.session_state.inventory.drop(index).reset_index(drop=True)
-                st.experimental_rerun()
-
         st.dataframe(st.session_state.inventory, width='stretch')
 
     elif selected == "➕ Add Product":
