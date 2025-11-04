@@ -1,0 +1,50 @@
+# Core packages for current Streamlit app
+streamlit>=1.29.0
+streamlit-option-menu>=0.3.6
+pandas>=2.0.0
+fpdf2>=2.7.6
+
+# Additional packages that might be useful for pharmacy management
+numpy>=1.24.0
+matplotlib>=3.7.0
+plotly>=5.17.0
+seaborn>=0.12.0
+
+# For future database integration (mentioned in README)
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.0
+pymysql>=1.1.0
+
+# For authentication and security (future use)
+bcrypt>=4.0.0
+python-jose[cryptography]>=3.3.0
+
+# For email functionality (future use)
+# smtplib is built-in to Python, no separate package needed
+
+# For Excel operations
+openpyxl>=3.1.0
+xlsxwriter>=3.1.0
+
+# For environment variables
+python-dotenv>=1.0.0
+
+# For date and time operations
+python-dateutil>=2.8.0
+
+# For API development (future Flask/FastAPI integration)
+flask>=3.0.0
+flask-sqlalchemy>=3.1.0
+flask-cors>=4.0.0
+
+# For testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# For code formatting and linting
+black>=23.0.0
+flake8>=6.0.0
+
+# For barcode generation (mentioned in README)
+python-barcode[images]>=0.15.0
+pillow>=10.0.0

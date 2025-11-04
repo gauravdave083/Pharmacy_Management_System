@@ -11,7 +11,7 @@ def load_inventory():
         "Item": ["Paracetamol", "Ibuprofen", "Amoxicillin"],
         "Quantity": [100, 50, 200],
         "Price": [1.5, 2.0, 0.8],
-        "Product Type": ["💊", "💊", "💊"]
+        "Type": ["Tablet 💊", "Tablet 💊", "Tablet 💊"]
     })
 
 @st.cache_data
@@ -31,19 +31,21 @@ def generate_report_from_inventory(inventory):
 def create_pdf(dataframe):
     pdf = FPDF()
     pdf.add_page()
-    pdf.set_font("Arial", size=12)
-    pdf.cell(200, 10, txt="Pharmacy Management System Report", ln=True, align='C')
+    pdf.set_font("Helvetica", size=12)
+    pdf.cell(200, 10, text="Pharmacy Management System Report", new_x="LMARGIN", new_y="NEXT", align='C')
 
     for i, row in dataframe.iterrows():
         # Remove unsupported characters
-        section = row['Report Section'].encode('latin1', 'ignore').decode('latin1')
-        details = row['Details'].encode('latin1', 'ignore').decode('latin1')
-        pdf.cell(200, 10, txt=f"{section}: {details}", ln=True)
+        section = str(row['Report Section']).encode('latin1', 'ignore').decode('latin1')
+        details = str(row['Details']).encode('latin1', 'ignore').decode('latin1')
+        pdf.cell(200, 10, text=f"{section}: {details}", new_x="LMARGIN", new_y="NEXT")
 
     return pdf
 
 def download_pdf(pdf):
-    pdf_output = pdf.output(dest="S").encode("latin1", errors="ignore")
+    # Get the PDF output as bytes
+    pdf_output = pdf.output()
+    # Encode to base64 for download
     b64 = base64.b64encode(pdf_output).decode()
     href = f'<a href="data:application/pdf;base64,{b64}" download="report.pdf">Download Report as PDF</a>'
     return href
@@ -57,21 +59,18 @@ def main():
     # Ensure inventory table and add product attributes are consistent
     if "Type" not in st.session_state.inventory.columns:
         def assign_product_type(item_name):
-            if item_name.lower() in ["paracetamol", "ibuprofen", "amoxicillin"]:
+            # Clean item name from any existing emojis first
+            clean_name = item_name.split()[-1] if item_name.split() else item_name
+            if clean_name.lower() in ["paracetamol", "ibuprofen", "amoxicillin"]:
                 return "Tablet 💊"
-            elif "syrup" in item_name.lower():
+            elif "syrup" in clean_name.lower():
                 return "Syrup 🥤"
-            elif "injection" in item_name.lower():
+            elif "injection" in clean_name.lower():
                 return "Injection 💉"
             else:
                 return "Other 🛒"
 
         st.session_state.inventory["Type"] = st.session_state.inventory["Item"].apply(assign_product_type)
-
-    # Update product names to include dynamic emojis in front
-    st.session_state.inventory["Item"] = st.session_state.inventory.apply(
-        lambda row: f"{row['Type']} {row['Item']}", axis=1
-    )
 
     with st.sidebar:
         st.markdown("""
@@ -92,7 +91,7 @@ def main():
 
     if selected == "🏠 Home":
         st.title("🏥 Welcome to the Pharmacy Management System")
-        st.image("https://via.placeholder.com/800x300.png?text=Pharmacy+Management+System", use_container_width=True)
+        st.image("https://via.placeholder.com/800x300.png?text=Pharmacy+Management+System", width="stretch")
         st.write("""
         Welcome to the **Pharmacy Management System**! This platform helps you:
         - Manage your inventory efficiently.
