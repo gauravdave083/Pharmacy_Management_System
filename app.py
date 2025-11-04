@@ -56,7 +56,22 @@ def main():
 
     # Ensure inventory table and add product attributes are consistent
     if "Type" not in st.session_state.inventory.columns:
-        st.session_state.inventory["Type"] = "Other 🛒"
+        def assign_product_type(item_name):
+            if item_name.lower() in ["paracetamol", "ibuprofen", "amoxicillin"]:
+                return "Tablet 💊"
+            elif "syrup" in item_name.lower():
+                return "Syrup 🥤"
+            elif "injection" in item_name.lower():
+                return "Injection 💉"
+            else:
+                return "Other 🛒"
+
+        st.session_state.inventory["Type"] = st.session_state.inventory["Item"].apply(assign_product_type)
+
+    # Update product names to include dynamic emojis in front
+    st.session_state.inventory["Item"] = st.session_state.inventory.apply(
+        lambda row: f"{row['Type']} {row['Item']}", axis=1
+    )
 
     with st.sidebar:
         st.markdown("""
