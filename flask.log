@@ -69,3 +69,20 @@ AttributeError: 'NoneType' object has no attribute 'aggregate'
 127.0.0.1 - - [04/Nov/2025 19:44:57] "GET /health HTTP/1.1" 200 -
 127.0.0.1 - - [04/Nov/2025 19:44:59] "GET /health HTTP/1.1" 200 -
 127.0.0.1 - - [04/Nov/2025 19:44:59] "GET /api/medications?page=1&page_size=100 HTTP/1.1" 200 -
+ * Detected change in '/workspaces/Pharmacy_Management_System/app.py', reloading
+ * Detected change in '/workspaces/Pharmacy_Management_System/app.py', reloading
+✅ Connected to MongoDB: pharmacy_management
+✅ MongoEngine connected to: pharmacy_management
+Warning: Could not create index email: An existing index has the same name as the requested index. When index names are not specified, they are auto generated and can cause conflicts. Please refer to our documentation. Requested index: { v: 2, key: { email: 1 }, name: "email_1", sparse: true }, existing index: { v: 2, key: { email: 1 }, name: "email_1", background: false }, full error: {'ok': 0.0, 'errmsg': 'An existing index has the same name as the requested index. When index names are not specified, they are auto generated and can cause conflicts. Please refer to our documentation. Requested index: { v: 2, key: { email: 1 }, name: "email_1", sparse: true }, existing index: { v: 2, key: { email: 1 }, name: "email_1", background: false }', 'code': 86, 'codeName': 'IndexKeySpecsConflict'}
+✅ Database indexes processed successfully
+ * Restarting with watchdog (inotify)
+ * Debugger is active!
+ * Debugger PIN: 123-252-391
+ * Detected change in '/workspaces/Pharmacy_Management_System/backend/database/operations.py', reloading
+✅ Connected to MongoDB: pharmacy_management
+✅ MongoEngine connected to: pharmacy_management
+Warning: Could not create index email: An existing index has the same name as the requested index. When index names are not specified, they are auto generated and can cause conflicts. Please refer to our documentation. Requested index: { v: 2, key: { email: 1 }, name: "email_1", sparse: true }, existing index: { v: 2, key: { email: 1 }, name: "email_1", background: false }, full error: {'ok': 0.0, 'errmsg': 'An existing index has the same name as the requested index. When index names are not specified, they are auto generated and can cause conflicts. Please refer to our documentation. Requested index: { v: 2, key: { email: 1 }, name: "email_1", sparse: true }, existing index: { v: 2, key: { email: 1 }, name: "email_1", background: false }', 'code': 86, 'codeName': 'IndexKeySpecsConflict'}
+✅ Database indexes processed successfully
+ * Restarting with watchdog (inotify)
+ * Debugger is active!
+ * Debugger PIN: 123-252-391
