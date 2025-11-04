@@ -591,6 +591,116 @@ For support and questions:
 - [ ] Integration with insurance verification systems
 - [ ] Multi-pharmacy chain support
 
+## Deployment
+
+### Quick Deployment
+
+#### Option 1: Using the Deploy Script (Recommended)
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd Pharmacy_Management_System
+
+# Make script executable
+chmod +x deploy.sh
+
+# Local deployment
+./deploy.sh local
+
+# Docker deployment
+./deploy.sh docker
+
+# Production deployment
+./deploy.sh production
+```
+
+#### Option 2: Manual Docker Deployment
+```bash
+# Start all services
+docker-compose up -d
+
+# Seed database
+docker-compose exec api python seed_database.py
+
+# View logs
+docker-compose logs -f
+```
+
+#### Option 3: Manual Local Setup
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Start MongoDB
+sudo systemctl start mongod
+
+# Seed database
+python seed_database.py
+
+# Start API server
+python backend/app.py
+
+# Start frontend (in another terminal)
+streamlit run app.py
+```
+
+### Production Deployment
+
+For production deployment, see [DEPLOYMENT.md](DEPLOYMENT.md) for comprehensive instructions including:
+
+- **Cloud Platforms**: AWS, GCP, Azure deployment guides
+- **Container Orchestration**: Kubernetes deployment
+- **PaaS Options**: Heroku, Railway deployment
+- **Security**: SSL configuration, environment variables
+- **Monitoring**: Health checks, logging, metrics
+- **Scaling**: Load balancing, horizontal scaling
+
+### Access Points
+
+After deployment, access the application at:
+
+- **Frontend**: http://localhost:8501 (Streamlit UI)
+- **API**: http://localhost:5000 (REST API)
+- **Health Check**: http://localhost:5000/health
+- **API Documentation**: http://localhost:5000/api/docs (if Swagger is enabled)
+
+### Environment Configuration
+
+Copy `.env.example` to `.env` and configure:
+
+```bash
+# Database
+MONGODB_URI=mongodb://localhost:27017/pharmacy_management
+
+# Flask
+FLASK_ENV=production
+SECRET_KEY=your-secret-key-here
+
+# API
+API_BASE_URL=http://localhost:5000
+```
+
+## Architecture
+
+### System Components
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Streamlit     │───▶│   Flask API     │───▶│    MongoDB      │
+│   Frontend      │    │   Backend       │    │   Database      │
+│   (Port 8501)   │    │   (Port 5000)   │    │   (Port 27017)  │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+```
+
+### API Endpoints
+
+- `GET /health` - Health check
+- `GET /api/medications` - Get all medications
+- `POST /api/medications` - Add new medication
+- `GET /api/customers` - Get all customers
+- `POST /api/sales` - Record new sale
+- `GET /api/reports/sales` - Sales reports
+
 ## Authors
 
 - Your Name - Initial work
@@ -600,3 +710,5 @@ For support and questions:
 - Flask/Django community
 - SQLAlchemy documentation
 - Python packaging community
+- Streamlit community
+- MongoDB documentation

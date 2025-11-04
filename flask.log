@@ -1,7 +1,6 @@
 nohup: ignoring input
 ✅ Connected to MongoDB: pharmacy_management
 ✅ MongoEngine connected to: pharmacy_management
-Warning: Could not create index email: An existing index has the same name as the requested index. When index names are not specified, they are auto generated and can cause conflicts. Please refer to our documentation. Requested index: { v: 2, key: { email: 1 }, name: "email_1", sparse: true }, existing index: { v: 2, key: { email: 1 }, name: "email_1", background: false }, full error: {'ok': 0.0, 'errmsg': 'An existing index has the same name as the requested index. When index names are not specified, they are auto generated and can cause conflicts. Please refer to our documentation. Requested index: { v: 2, key: { email: 1 }, name: "email_1", sparse: true }, existing index: { v: 2, key: { email: 1 }, name: "email_1", background: false }', 'code': 86, 'codeName': 'IndexKeySpecsConflict'}
 ✅ Database indexes processed successfully
  * Serving Flask app 'app'
  * Debug mode: on
@@ -15,74 +14,7 @@ Press CTRL+C to quit
  * Debugger PIN: 123-252-391
 /workspaces/Pharmacy_Management_System/backend/app.py:98: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   'timestamp': datetime.utcnow().isoformat(),
-127.0.0.1 - - [04/Nov/2025 19:42:53] "GET /health HTTP/1.1" 200 -
-127.0.0.1 - - [04/Nov/2025 19:42:58] "GET /api/medications HTTP/1.1" 200 -
-127.0.0.1 - - [04/Nov/2025 19:43:07] "GET /api/customers HTTP/1.1" 200 -
-127.0.0.1 - - [04/Nov/2025 19:43:13] "GET /api/sales HTTP/1.1" 200 -
-127.0.0.1 - - [04/Nov/2025 19:43:32] "GET /health HTTP/1.1" 200 -
-127.0.0.1 - - [04/Nov/2025 19:43:32] "GET /api/medications?page=1&page_size=100 HTTP/1.1" 200 -
-127.0.0.1 - - [04/Nov/2025 19:43:40] "GET /health HTTP/1.1" 200 -
-127.0.0.1 - - [04/Nov/2025 19:43:44] "GET /health HTTP/1.1" 200 -
-127.0.0.1 - - [04/Nov/2025 19:43:44] "GET /api/sales?page=1&page_size=50 HTTP/1.1" 200 -
-127.0.0.1 - - [04/Nov/2025 19:43:47] "GET /health HTTP/1.1" 200 -
-/workspaces/Pharmacy_Management_System/backend/app.py:329: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
-  date = datetime.utcnow()
-127.0.0.1 - - [04/Nov/2025 19:43:47] "GET /api/sales/reports/daily HTTP/1.1" 500 -
-Traceback (most recent call last):
-  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/flask/app.py", line 1536, in __call__
-    return self.wsgi_app(environ, start_response)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/flask/app.py", line 1514, in wsgi_app
-    response = self.handle_exception(e)
-               ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/flask_cors/extension.py", line 176, in wrapped_function
-    return cors_after_request(app.make_response(f(*args, **kwargs)))
-                                                ^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/flask_cors/extension.py", line 176, in wrapped_function
-    return cors_after_request(app.make_response(f(*args, **kwargs)))
-                                                ^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/Pharmacy_Management_System/backend/app.py", line 331, in get_daily_sales_report
-    report = sale_repo.get_daily_sales(date)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/Pharmacy_Management_System/backend/database/operations.py", line 287, in get_daily_sales
-    results = list(self.collection.aggregate(pipeline))
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'NoneType' object has no attribute 'aggregate'
-127.0.0.1 - - [04/Nov/2025 19:43:54] "GET /health HTTP/1.1" 200 -
-127.0.0.1 - - [04/Nov/2025 19:43:59] "GET /health HTTP/1.1" 200 -
-127.0.0.1 - - [04/Nov/2025 19:44:09] "GET /health HTTP/1.1" 200 -
-127.0.0.1 - - [04/Nov/2025 19:44:10] "GET /health HTTP/1.1" 200 -
-127.0.0.1 - - [04/Nov/2025 19:44:57] "GET /health HTTP/1.1" 200 -
-127.0.0.1 - - [04/Nov/2025 19:44:57] "POST /api/medications HTTP/1.1" 201 -
-127.0.0.1 - - [04/Nov/2025 19:44:57] "GET /health HTTP/1.1" 200 -
-127.0.0.1 - - [04/Nov/2025 19:44:59] "GET /health HTTP/1.1" 200 -
-127.0.0.1 - - [04/Nov/2025 19:44:59] "GET /api/medications?page=1&page_size=100 HTTP/1.1" 200 -
- * Detected change in '/workspaces/Pharmacy_Management_System/app.py', reloading
- * Detected change in '/workspaces/Pharmacy_Management_System/app.py', reloading
-✅ Connected to MongoDB: pharmacy_management
-✅ MongoEngine connected to: pharmacy_management
-Warning: Could not create index email: An existing index has the same name as the requested index. When index names are not specified, they are auto generated and can cause conflicts. Please refer to our documentation. Requested index: { v: 2, key: { email: 1 }, name: "email_1", sparse: true }, existing index: { v: 2, key: { email: 1 }, name: "email_1", background: false }, full error: {'ok': 0.0, 'errmsg': 'An existing index has the same name as the requested index. When index names are not specified, they are auto generated and can cause conflicts. Please refer to our documentation. Requested index: { v: 2, key: { email: 1 }, name: "email_1", sparse: true }, existing index: { v: 2, key: { email: 1 }, name: "email_1", background: false }', 'code': 86, 'codeName': 'IndexKeySpecsConflict'}
-✅ Database indexes processed successfully
- * Restarting with watchdog (inotify)
- * Debugger is active!
- * Debugger PIN: 123-252-391
- * Detected change in '/workspaces/Pharmacy_Management_System/backend/database/operations.py', reloading
-✅ Connected to MongoDB: pharmacy_management
-✅ MongoEngine connected to: pharmacy_management
-Warning: Could not create index email: An existing index has the same name as the requested index. When index names are not specified, they are auto generated and can cause conflicts. Please refer to our documentation. Requested index: { v: 2, key: { email: 1 }, name: "email_1", sparse: true }, existing index: { v: 2, key: { email: 1 }, name: "email_1", background: false }, full error: {'ok': 0.0, 'errmsg': 'An existing index has the same name as the requested index. When index names are not specified, they are auto generated and can cause conflicts. Please refer to our documentation. Requested index: { v: 2, key: { email: 1 }, name: "email_1", sparse: true }, existing index: { v: 2, key: { email: 1 }, name: "email_1", background: false }', 'code': 86, 'codeName': 'IndexKeySpecsConflict'}
-✅ Database indexes processed successfully
- * Restarting with watchdog (inotify)
- * Debugger is active!
- * Debugger PIN: 123-252-391
+127.0.0.1 - - [04/Nov/2025 20:08:05] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2025 20:08:32] "GET /api/medications HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2025 20:08:40] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2025 20:08:40] "GET /api/medications?page=1&page_size=100 HTTP/1.1" 200 -
